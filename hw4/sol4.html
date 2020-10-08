@@ -1,0 +1,264 @@
+<html>
+<head>
+<title>PY 502, Homeworks solutions 5</title>
+</head>     
+
+<body bgcolor="#ffFFdd">
+
+
+<center><p><h3>
+Solutions for homework assignment #4
+</p></h3></center>
+
+<table border="3" cellpadding="3" cellspacing="3" width="700" align="center"
+vspace="10" bgcolor="#ddddff"><tr><td>
+
+<p><h4>Problem A (variational calculation)</h4></p>
+
+<p>
+Solution program [<a href="var.f90">var.f90</a>]
+</p>
+
+<p>
+First, let's look at how the energies of the first four states
+converge as a function of the number of basis states, N=Nx*Ny,
+first using Nx=Ny:
+</p>
+
+<pre>
+ Nx  Ny   Nx*Ny       E0            E1            E2            E3
+------------------------------------------------------------------------
+  5   5     25     0.01455951    0.02205329    0.04358191    0.06356153
+ 10  10    100     0.01420417    0.02106122    0.04320811    0.06354212
+ 15  15    225     0.01396114    0.02087201    0.04298447    0.06353202 
+ 20  20    400     0.01392182    0.02071306    0.04294863    0.06352973
+ 25  25    625     0.01389049    0.02068858    0.04291843    0.06352809
+ 30  30    900     0.01388495    0.02067539    0.04291384    0.06352769
+ 35  35   1225     0.01388330    0.02067261    0.04291210    0.06352759
+ 40  40   1600     0.01388304    0.02067227    0.04291190    0.06352755
+ 45  45   2025     0.01388291    0.02067210    0.04291175    0.06352754
+ 50  50   2500     0.01388262    0.02067129    0.04291153    0.06352751
+ 55  55   3025     0.01388170    0.02067057    0.04291075    0.06352745
+ 60  60   3600     0.01388129    0.02066912    0.04291042    0.06352741
+</pre>
+
+<p>
+Since the system is rectangular, and longer in the y-direction, one might expect 
+the convergence to be faster for rectangular lattices with Ny > Nx. Let's look at results for Ny=2*Nx:
+</p>
+
+<pre>
+ Nx  Ny   Nx*Ny        E0            E1            E2            E3
+------------------------------------------------------------------------
+  5  10     50     0.01422518    0.02110244    0.04322777    0.06355619
+ 10  20    200     0.01392777    0.02072316    0.04295374    0.06353090
+ 15  30    450     0.01388708    0.02067886    0.04291568    0.06352840
+ 20  40    800     0.01388417    0.02067411    0.04291288    0.06352777
+ 25  50   1200     0.01388315    0.02067215    0.04291198    0.06352767
+ 30  60   1800     0.01388166    0.02066972    0.04291074    0.06352749
+ 35  70   2400     0.01388077    0.02066861    0.04290998    0.06352742
+ 40  80   3200     0.01388065    0.02066840    0.04290986    0.06352739
+ </pre>
+
+<p>
+Indeed, for large N the energy here is lower (compare, e.g., the results for 45*45 and 30*60).
+</p>
+
+<p>
+For completeness, let's also look at the case Ny=Nx/2:
+</p>
+
+<pre>
+ Nx  Ny   Nx*Ny        E0            E1            E2            E3
+------------------------------------------------------------------------
+ 10   5     50     0.01454808    0.02203783    0.04357100    0.06355273
+ 20  10    200     0.01420087    0.02105476    0.04320518    0.06354146
+ 30  15    450     0.01395945    0.02086954    0.04298302    0.06353145
+ 40  20    800     0.01392084    0.02071138    0.04294779    0.06352954
+ 50  25   1200     0.01388998    0.02068776    0.04291799    0.06352793
+ 60  30   1800     0.01388459    0.02067480    0.04291353    0.06352762
+ 70  35   2400     0.01388310    0.02067227    0.04291193    0.06352753
+ 80  40   3200     0.01388288    0.02067201    0.04291177    0.06352752
+ </pre>
+
+<p>
+Here the convergence is definitely worse than in the two preceding cases.
+</p>
+
+<p>
+The fiure below shows the data for large N. Regardless of the ratio Ny/Nx, the energy should converge 
+to the same value when N goes to infinity (which seems very plausible here). Note, however, how un-smooth 
+the convergence is. Obviously, not only the shape of the "box"  matters in how the energies converge as a 
+function of N and Ny/Nx, but also the internal potential structure. It may not always be easy to see what 
+would be the best ratio to use (and here we have only given a couple of examples, without exploring this 
+in detail).
+</p>
+
+</p>
+
+<p>
+<center>
+The ground state energy versus the number of states (N=Nx*Ny) for different ratios of Nx and Ny.
+<img src="e_var.jpg" width="620" hspace="23" vspace="10">
+</p>
+
+
+
+<p>
+Now let's look at the wave functions. These were calculated using Nx=Ny=40:
+</p>
+
+<p>
+<center>The squared ground state (left) and first
+excited state (right) wave functions.</center>
+<img src="v0.jpg" width="300" hspace="23" vspace="10">
+<img src="v1.jpg" width="300" hspace="10" vspace="10">
+</p>
+
+<p>
+Since the square is graphed we don't see the phase. Looking at the wave function itself, the ground state 
+is (as expected) found to be symmetric and the first excited state is anti-symmetric.
+</p>
+
+
+<p>
+<center>The squared second (left) and third
+excited state (right) wave functions.</center>
+<img src="v2.jpg" width="300" hspace="23" vspace="10">
+<img src="v3.jpg" width="300" hspace="10" vspace="10">
+</p>
+
+<p>
+From these graphs we can see that the n=1 and n=3 states look very
+much like bonding states of a diatomic molecule (large probability between the
+attractive centers). The n=2 state looks like and anti-bonding state. The n=4 state 
+doesn't really look like a state of a diatomic molecule, because the effects of
+the finite size of the "box" have become important here, but still the 
+state has some anti-bonding features (low probability in the region 
+between the attractive centers).
+</p>
+
+</td></tr></table>
+
+
+<table border="3" cellpadding="3" cellspacing="3" width="700" align="center"
+vspace="10" bgcolor="#ddddff"><tr><td>
+
+<p><h4>Problem B (discretized real-space / Lanczos calculation)</h4></p>
+
+<p>
+Solution program [<a href="lanc.f90">lanc.f90</a>]
+</p>
+
+<p>
+In the discretized real-space calculation, we check the convergence of the first four energies 
+as a function of the discretization delta and the number of Lanczos iterations:
+</p>
+
+<pre>
+delta=0.2 (25*50 lattice elements).
+=================================================================
+ iterations     E0            E1            E2            E3
+-----------------------------------------------------------------
+  50        0.01424877    0.03982384    0.07577415    0.11434867
+ 100        0.01104897    0.01692824    0.04023400    0.05891621
+ 150        0.01104894    0.01692816    0.04023066    0.05850876
+ 200        0.01104894    0.01692816    0.04023066    0.05850875
+ 300        0.01104894    0.01104894    0.01692816    0.01692816
+ 400        0.01104894    0.01104894    0.01105785    0.01692816
+</pre>
+
+<p>
+After 200 Lanczos iterations (basis states) the four lowest energies appear to be well
+converged to 8 decimal places. After that, we can see the  successive appearance of
+multiple copies of the same state energi), due to non-othogonality problems. These
+problems could be easily overcome by the re-orthogonalization procedure discussed in
+class.
+</p>
+
+<p>
+Next, we successively double the number of lattice elements in each direction, to investigate
+the convergence of the energies as a function of the discretization cell-size delta. 
+</p>
+
+<pre>
+delta=0.1 (50*100 lattice elements).
+=================================================================
+ iterations     E0            E1            E2            E3
+-----------------------------------------------------------------
+ 100        0.01359333    0.04270708    0.08373779    0.14099236
+ 200        0.01324518    0.01992994    0.04191934    0.06348454
+ 300        0.01324517    0.01992912    0.04191724    0.06106467
+ 400        0.01324517    0.01992912    0.04191724    0.06106464
+ 500        0.01324517    0.01324522    0.01992912    0.02006401
+ 600        0.01324517    0.01324517    0.01992912    0.01992912
+</pre>
+
+<pre>
+delta=0.05 (100*200 lattice elements).
+=================================================================
+ iterations     E0            E1            E2            E3
+-----------------------------------------------------------------
+ 100        0.06298295    0.12106840    0.25709737    0.48510783
+ 200        0.01721634    0.04861115    0.07595067    0.13176396
+ 300        0.01391936    0.02144963    0.04370488    0.07304734
+ 400        0.01356656    0.02030848    0.04243093    0.06330082
+ 500        0.01356638    0.02030761    0.04242152    0.06229634
+ 600        0.01356638    0.02030761    0.04242152    0.06229564
+ 700        0.01356638    0.02030761    0.04242152    0.06229563
+ 800        0.01356638    0.02030761    0.04242152    0.06229563
+</pre>
+
+<pre>
+delta=0.025 (200*400 lattice elements).
+=================================================================
+ iterations     E0            E1            E2            E3
+-----------------------------------------------------------------
+ 100       0.05420624    0.41064007    0.92209001    1.72127298
+ 200       0.02016086    0.08355610    0.27699021    0.46687546
+ 300       0.01728184    0.05908541    0.11035425    0.22896869
+ 400       0.01459613    0.02183848    0.06553600    0.13353513
+ 500       0.01376280    0.02055673    0.06244828    0.07478966
+ 600       0.01372735    0.02049812    0.05139688    0.06462293
+ 700       0.01372423    0.02049013    0.04317888    0.06311201
+ 800       0.01372417    0.02048990    0.04267267    0.06291673
+ 900       0.01372417    0.02048990    0.04266768    0.06291183
+1000       0.01372417    0.02048990    0.04266759    0.06291163
+1100       0.01372417    0.02048990    0.04266759    0.06291158
+1200       0.01372417    0.02048990    0.04266759    0.06291157
+</pre>
+
+<p>
+Note that the details of the convergence depend on the initial wave function, which here was
+generated at random in all cases. Your initial wave function will be different and you should
+see different numbers. The over-all rate of convergence should be similar, however, and the
+final converged result should be the samae. Note also that the non-orthogonality problems become 
+less severa with increasing number of cells.
+</p>
+
+
+<p>
+Let's now check the consistency of the ground state energy with the result of
+the variational calculation. The next plot shows the Lanczos results for E0 and E1 versus
+delta (circles), compared with the variational result (squares at delta=0). The trend
+versus delta is clearly consistent with the same energies in the limit of delta=0. Note that the 
+leading delta dependence is linear, not quadratic (as is the case for a purely kinetic hamiltonian).
+Evidently the discretization error is on order in delta worse when there is a potential energy 
+present.
+</p>
+
+<center>
+<img src="e_lan.jpg" width="600" hspace="23" vspace="10">
+</center>
+
+<p>
+The wave functions look almost identical to those in the variational calculation and are
+not graphed here.
+</p>
+
+
+
+</td></tr></table>
+
+</body>
+</html>

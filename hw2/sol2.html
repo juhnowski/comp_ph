@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>PY 502, Homeworks solutions 2</title>
+</head>     
+
+<body bgcolor="#ffFFdd">
+
+<center><p><h3>
+Solutions for homework assignment #2
+</p></h3></center>
+
+<table border="3" cellpadding="3" cellspacing="3" width="700" align="center"
+vspace="10" bgcolor="#ddddff"><tr><td>
+
+<p>
+Solution program [<a href="geostat.f90">geostat.f90</a>]
+</p>
+
+<p><h4>Problem A (the moon moving in the equatorial plane)</h4></p>
+
+The deviation of the angular position of the satellite from its position in the absense of 
+the moon is shown in the figure. After 100 days, the deviation is approximately 18 degrees, and 
+hence the satellite's position must clearly be adjusted regularly to keep it above the desired 
+location. This calculation used 500 integration steps per day.
+
+<center><img src="fig1.jpg" width="600" hspace="10" vspace="10"></center>
+
+The next figure shows the relative deviation of the altitude from the geo-stationary altitude. 
+The maximum deviation is about 500 km, or more than 1%. Note that the fluctuations exhibit almost, but 
+not quite, periodicity corresponding to the moon's period of 27.25 days.
+
+<center><img src="fig2.jpg" width="600" hspace="10" vspace="10"></center>
+
+The figure below shows the angular deviation in the time range 90 to 100 days
+calculated using different numbers of integration steps per day. The result for 200 and 400
+steps per day can barely be distinguished.
+
+<center><img src="fig3.jpg" width="600" hspace="10" vspace="10"></center>
+
+<p>
+<b>Compensating for the drift</b>
+</p>
+
+By adjusting the initial period of the orbit (the constant a), we can suppress the overall drift in the 
+angle observed above. By trial and error ("manual bisection"), it is found that T/Ts=1.000486 produces an 
+orbit with no net drift; just oscillations of approximately 1.4 degrees about the stationary position. This 
+may still have to be corrected for in practice because of the high directionality of the transmitted/received 
+radio-frequency signals.
+
+<center><img src="fig4.jpg" width="600" hspace="10" vspace="10"></center>
+
+<center><img src="fig5.jpg" width="600" hspace="10" vspace="10"></center>
+
+One can understand the main effect of the moon as reducing the effective mass of earth (imagine the
+mass of the moon beaing spread out uniformly over the orbit). With a reduced mass, the initial orbit has to 
+be higher. This accounts for the over-all drift. The oscillations are clearly beyond this simple
+approximation.
+
+</td></tr></table>
+
+<table border="3" cellpadding="3" cellspacing="3" width="700" align="center"
+vspace="10" bgcolor="#ddddff"><tr><td>
+
+<p><h4>Problem B (the moon is moving in a 25-degree inclined orbit)</h4></p>
+
+The angular (longitude) deviations are similar to the previous case with an over-all drift and oscillations.
+
+<center><img src="fig6.jpg" width="600" hspace="10" vspace="10"></center>
+
+Now the satellite also is pulled outside the equatorial plane, as shown in the following two figures.
+
+<center><img src="fig7.jpg" width="600" hspace="10" vspace="10"></center>
+
+<center><img src="fig8.jpg" width="600" hspace="10" vspace="10"></center>
+
+<p>
+<b>Compensating for the drift</b>
+</p>
+
+As in A, we can compensate for the over-all longitudinal drift by choosing a higher initial orbit.
+T/Ts=1.000439 gives an orbit with most of the drift removed, as shown in this figure.
+
+<center><img src="fig9.jpg" width="600" hspace="10" vspace="10"></center>
+
+However, this does not move the oscillations out of the equatorial plane, as shown in this figure.
+
+<center><img src="fig8.jpg" width="600" hspace="10" vspace="10"></center>
+
+Thus we conclude that the moon really ruins the concept of geo-stationary orbit. Sattellites that 
+need to approximate such orbits must therefore be equpped with rockets to allow for occasional  adjustments.
+
+
+
+</td></tr></table>
+
+</body>
+</html>

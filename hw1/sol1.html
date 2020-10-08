@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>PY 502, Homework Solutions 1</title>
+</head>     
+
+<body bgcolor="#ffFFdd">
+
+
+<center><p><h3>
+Solutions for homework assignment #1
+</p></h3></center>
+
+<table border="3" cellpadding="3" cellspacing="3" width="700" align="center"
+vspace="10" bgcolor="#ddddff"><tr><td>
+
+<p>
+Solution program [<a href="rwalk.f90">rwalk.f90</a>]
+</p>
+
+<p>
+As in the examples for "smaller" random-number generators discussed in class, bit 0 alternates
+between 0 and 1, while higher bits show an increasingly "random" behavior. Translating
+this kind of behavior to probability distributions of the random walk, it's clear that
+the bit-0 walker will not "get anywhere" (x=0 after any even number of steps), while
+the higher bits develop gradually into distributions approaching that of an unbiased
+random walk.
+</p>
+
+<p>
+Below is a graph showing probability distributions for some of the bits:
+</p>
+
+<center><img src="dist1.jpg" width="600" hspace="10" vspace="10"></center>
+
+<p>
+The same data with the probabilities on a log scale:
+</p>
+
+<center><img src="dist2.jpg" width="600" hspace="10" vspace="10"></center>
+
+The next task was to compute the measure D*sqrt(N_w) of the deviation from the
+generated distributions and the correct one. This graph shows results for distributions
+averaged over 10^3 to 10^7 different walks:
+
+<center><img src="dev.jpg" width="600" hspace="10" vspace="10"></center>
+
+<p>
+A divergence with the number of walks implies a statistically detectable deviation
+from the correct distribution, while values around 1 correspond to no detectable
+deviations (given the number of walks). Note that the oscillations around 1 will
+not diminish with increasing N_w, because the measure contains a factor sqrt(N_w),
+which cancels out the 1/sqrt(N_w) behavior of the statistical error of Delta itself.
+</p>
+
+<p>
+From these results we can conclude that the low bits are very bad random generators
+for 0,1 sequences. The behavior improves quickly with increasing bit number, but at
+some level of precision (here number of walks, in general the length of the sequence
+of bits) they all show deviations. However, the high bits (upper half or so) should
+break down only for extremely long sequences. Because of this, floating-point numbers
+generated based on this random-integer generator are sufficiently good random numbers
+for most applications.
+</p>
+
+<p>
+Note that we have here not addressed the important issue of correlations between the
+bits, which, if significant, would case bad behaviors for the generated integer. It turns
+out that this kind of generator based on 64 bits also passes such tests with good marks
+for the high bits.
+</p>
+
+
+
+</td></tr></table>
+
+
+</body>
+</html>
