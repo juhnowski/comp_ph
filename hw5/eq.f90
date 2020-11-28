@@ -21,7 +21,8 @@
 !-------------------------------------------------------------------!
  program ising2d
 !---------------!
- use system; implicit none
+ use system; 
+ implicit none
 
  integer :: i,j,k,m,t,bins,reps,steps
  real(8) :: temp
@@ -83,7 +84,8 @@
 !--------------------------------------------!
  subroutine mcstep(m,t)
 !----------------------!
- use system; implicit none
+ use system; 
+ implicit none
 
  integer :: i,m,t,s,x,y,s1,s2,s3,s4
 
@@ -114,7 +116,8 @@
 !-----------------------------------------------!
  subroutine writedata(reps,steps)
 !--------------------------------!
- use system; implicit none
+ use system; 
+ implicit none
 
  integer :: i,reps,steps
  

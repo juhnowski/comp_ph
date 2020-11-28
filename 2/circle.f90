@@ -10,9 +10,9 @@
  integer, parameter :: nbin=20
 
  integer :: i,j,n
- real(8) :: x2,y2,av,er,sum,rand
+ real(8) :: x2,y2,av,er,sum!,rand
 
- external :: rand
+ !external :: rand
  
  write(*,'(a)',advance='no')'Number of samples per bin: ';read*,n
  call initran(1)

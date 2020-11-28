@@ -70,3 +70,7 @@ dsyev.f (процедура диагонализации LAPAC; веществе
    13 -2,1451483739 1,000000000000 -0,1595269579
    14 -2.1451483739 1.0000000000 0.4890986185
    15 -2,1451483739 1,000000000000 -0,1851207824
+
+   TODO:
+   https://www.datanovia.com/en/lessons/examples-of-dendrograms-visualization/
+   https://davetang.org/muse/2018/05/15/making-a-heatmap-in-r-with-the-pheatmap-package/

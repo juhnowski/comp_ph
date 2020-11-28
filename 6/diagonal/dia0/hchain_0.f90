@@ -121,7 +121,8 @@
 !--------------------------!
  subroutine magnetization()
 !--------------------------!
- use system; implicit none
+ use system 
+ implicit none
 
  integer :: i,j,a,b
  integer, allocatable :: mz(:)
