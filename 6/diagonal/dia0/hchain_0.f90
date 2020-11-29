@@ -31,9 +31,13 @@
  allocate(mag(0:nst-1))
 
  call hamiltonian()
+ call writedata_h()
  call diagonalize(nst,mat,vec,enr)
+ call writedata_d()
 
  call spinsquared()
+ call writedata_s()
+
  call transform(nst,mat,vec,spn)
  spn(:)=0.5d0*abs(sqrt(1.d0+4.d0*spn(:))-1.d0)
 
@@ -66,6 +70,113 @@
  end subroutine writedata
 !------------------------!
 
+!----------------------!
+ subroutine writedata_h()
+   !----------------------!
+    use system; implicit none
+   
+    integer :: i,j
+   
+    open(11,file='hamiltonian.dat',status='unknown')
+
+
+    DO i=0,nst-1
+      WRITE(11,*) (mat(i,j), j=1,nst-1)
+    END DO
+
+    close(11)
+   
+    end subroutine writedata_h
+   !------------------------!
+
+    !----------------------!
+
+
+
+!----------------------!
+    subroutine writedata_s()
+      !----------------------!
+       use system; implicit none
+      
+       integer :: i,j
+      
+       open(20,file='spin_mat.dat',status='unknown')
+   
+   
+       DO i=0,nst-1
+         WRITE(20,*) (mat(i,j), j=1,nst-1)
+       END DO
+   
+       close(20)
+      
+       end subroutine writedata_s
+      !------------------------!
+
+       
+!----------------------!
+       subroutine writedata_tr()
+         !----------------------!
+          use system; implicit none
+         
+          integer :: i,j
+         
+          open(12,file='tr_mat.dat',status='unknown')
+          open(13,file='tr_vec.dat',status='unknown')
+          open(14,file='tr_spn.dat',status='unknown')
+          
+          DO i=0,nst-1
+            WRITE(12,*) (mat(i,j), j=1,nst-1)
+          END DO
+      
+          DO i=0,nst-1
+            WRITE(13,*) (vec(i,j), j=1,nst-1)
+          END DO
+   
+          DO i=0,nst-1
+            WRITE(14,*) spn(i)
+          END DO
+   
+          close(12)
+          close(13)
+          close(14)
+         
+          end subroutine writedata_tr
+         !------------------------!
+   
+
+!----------------------!
+    subroutine writedata_d()
+      !----------------------!
+       use system; implicit none
+      
+       integer :: i,j
+      
+       open(12,file='diag_mat.dat',status='unknown')
+       open(13,file='diag_vec.dat',status='unknown')
+       open(14,file='diag_enr.dat',status='unknown')
+       
+       DO i=0,nst-1
+         WRITE(12,*) (mat(i,j), j=1,nst-1)
+       END DO
+   
+       DO i=0,nst-1
+         WRITE(13,*) (vec(i,j), j=1,nst-1)
+       END DO
+
+       DO i=0,nst-1
+         WRITE(14,*) enr(i)
+       END DO
+
+       close(12)
+       close(13)
+       close(14)
+      
+       end subroutine writedata_d
+      !------------------------!
+
+
+
+
 !------------------------!
  subroutine hamiltonian()
 !------------------------!
@@ -86,7 +197,6 @@
        endif
     enddo
  enddo
-
 
  end subroutine hamiltonian
 !--------------------------!
@@ -141,6 +251,14 @@
     enddo
  enddo
  mag(:)=(mag(:)-nn/2)*0.5d0
+
+
+ open(20,file='mz_mat.dat',status='unknown') 
+ DO i=0,nst-1
+   WRITE(20,*) mz(i)
+ END DO
+ close(20)
+
  deallocate(mz)
 
  end subroutine magnetization
@@ -173,6 +291,8 @@
  do i=1,n
     dia(i)=mat(i,i)
  enddo
+
+ call writedata_tr()
 
  end subroutine transform
 !------------------------!
