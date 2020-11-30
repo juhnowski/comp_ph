@@ -80,16 +80,17 @@
 
  integer :: i,k,nu
 
- open(10,file='eig.dat',position='append')
- write(10,*)'nu =',nu,' k = ',k,'   nst =',nrep
- do i=1,nrep
-    write(10,'(i5,2f18.10)')i-1,enr(i),spn(i)
- enddo
- close(10)
+ character (len=20) :: eig_filename
+ character (len=20) :: spn_filename
+ character (len=20) :: nrep_filename
 
- open(10,file='low.dat',position='append')
- write(10,30)nu,k,enr(1),spn(1),nrep
- 30 format(2i5,2f16.10,i10)
+ write (eig_filename,"('eig_',i0,'_',i0,'_',i0,'.csv')") nu,k,nrep
+
+ open(10,file=eig_filename,status='unknown')
+ WRITE(10,*) """X"",""Y"",""Z"""
+ do i=1,nrep
+    write(10,*)i-1,",",anint(enr(i)*10)/10,",",spn(i)
+ end do
  close(10)
 
  end subroutine writedata
