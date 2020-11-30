@@ -90,20 +90,30 @@
  use system; implicit none
 
  integer :: i,k,p,z
+ character (len=20) :: eig_filename
+ 
+ write (eig_filename,"('eig_',i0,'_',i0,'_',i0,'_',i0,'.csv')") k,p,z,nrep
 
- open(10,file='eig.dat',position='append')
- write(10,10)k,p,z,nrep
- 10 format(3i5,i10)
+ open(10,file=eig_filename,status='unknown')
+ WRITE(10,*) """X"",""Y"",""Z"""
  do i=1,nrep
-    write(10,20)i,enr(i),spn(i)
-    20 format(i5,'  ',2f16.10)
- enddo
+    write(10,*)i,",",anint(enr(i)*10)/10,",",spn(i)
+ end do
  close(10)
 
- open(10,file='low.dat',position='append')
- write(10,30)k,p,z,enr(1),spn(1),nrep
- 30 format(3i5,2f16.10,i10)
- close(10)
+ !open(10,file='eig.dat',position='append')
+ !write(10,10)k,p,z,nrep
+ !10 format(3i5,i10)
+ !do i=1,nrep
+ !   write(10,20)i,enr(i),spn(i)
+ !   20 format(i5,'  ',2f16.10)
+ !enddo
+ !close(10)
+
+ !open(10,file='low.dat',position='append')
+ !write(10,30)k,p,z,enr(1),spn(1),nrep
+ !30 format(3i5,2f16.10,i10)
+ !close(10)
 
  end subroutine writedata
 !------------------------!

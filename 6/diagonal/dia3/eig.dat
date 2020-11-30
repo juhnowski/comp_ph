@@ -1,0 +1,21 @@
+nu = 0, k =  0, p = -1,  nst =   0
+nu = 0, k =  0, p =  1,  nst =   1
+    0
+nu = 0, k =  1, p =  1,  nst =   0
+nu = 0, k =  2, p =  1,  nst =   0
+nu = 0, k =  3, p =  1,  nst =   0
+nu = 0, k =  4, p = -1,  nst =   0
+nu = 0, k =  4, p =  1,  nst =   0
+nu = 1, k =  0, p = -1,  nst =   0
+nu = 1, k =  0, p =  1,  nst =   1
+    0
+nu = 1, k =  1, p =  1,  nst =   1
+    0
+nu = 1, k =  2, p =  1,  nst =   1
+    0
+nu = 1, k =  3, p =  1,  nst =   1
+    0
+nu = 1, k =  4, p = -1,  nst =   1
+    0
+nu = 1, k =  4, p =  1,  nst =   0
+nu = 2, k =  0, p = -1,  nst =   0

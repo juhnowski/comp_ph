@@ -31,7 +31,9 @@
  open(10,file='read.in',status='old')
  read(10,*)nn,rm
  close(10)
- 
+
+ print *, nn, rm
+
  allocate(repr(rm))
  allocate(peri(rm))
  allocate(mtrf(rm))
@@ -82,17 +84,36 @@
 
  integer :: i,k,p,nu
 
- open(10,file='eig.dat',position='append')
- write(10,'(a,i2,a,i2,a,i2,a,i4)')'nu =',nu,', k = ',k,', p = ',p,',  nst =',nrep
+ character (len=20) :: eig_filename
+
+ if (nrep>0) then 
+
+ write (eig_filename,"('eig_',i0,'_',i0,'_',i0,'.csv')") nu,k,p
+
+ open(10,file=eig_filename,status='unknown')
+ WRITE(10,*) """X"",""Y"",""Z"""
  do i=1,nrep
-    write(10,'(i5,2f18.10)')i-1,enr(i),spn(i)
- enddo
+    write(10,*)i-1,",",anint(enr(i)*10)/10,",",spn(i)
+ end do
  close(10)
 
- open(10,file='low.dat',position='append')
- if (nrep/=0) write(10,30)nu,k,p,enr(1),spn(1),nrep
- 30 format(3i5,2f16.10,i10)
- close(10)
+end if
+
+! open(10,file='eig.dat',position='append')
+! write(10,'(a,i2,a,i2,a,i2,a,i4)')'nu =',nu,', k = ',k,', p = ',p,',  nst =',nrep
+! do i=1,nrep
+!    write(10,'(i5,2f18.10)')i-1,enr(i),spn(i)
+! enddo
+! close(10)
+
+ !open(10,file='low.dat',position='append')
+
+ !if (nrep/=0) then 
+ !  write(10,30)nu,k,p,enr(1),spn(1),nrep
+ !end if
+
+ !30 format(3i5,2f16.10,i10)
+ !close(10)
 
  end subroutine writedata
 !------------------------!
