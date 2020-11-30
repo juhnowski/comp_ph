@@ -62,10 +62,27 @@
  integer :: i
 
  open(10,file='eig.dat',status='unknown')
+ open(11,file='eig_s.csv',status='unknown')
+ open(12,file='eig_m.csv',status='unknown')
+
  do i=0,nst-1
     write(10,'(i5,3f18.10)')i,enr(i),spn(i),mag(i)
  enddo
+
+ WRITE(11,*) """X"",""Y"",""Z"""
+ DO i=0,nst-1
+      WRITE(11,*) i,",",anint(enr(i)*10)/10,",",spn(i)
+ END DO
+
+ WRITE(12,*) """X"",""Y"",""Z"""
+ DO i=0,nst-1
+      WRITE(12,*) i,",",anint(enr(i)*10)/10,",",mag(i)
+ END DO
+
+
  close(10)
+ close(11)
+ close(12)
 
  end subroutine writedata
 !------------------------!
@@ -77,11 +94,13 @@
    
     integer :: i,j
    
-    open(11,file='hamiltonian.dat',status='unknown')
+    open(11,file='hamiltonian.csv',status='unknown')
 
-
+    WRITE(11,*) """X"",""Y"",""Z"""
     DO i=0,nst-1
-      WRITE(11,*) (mat(i,j), j=1,nst-1)
+      DO j=0,nst-1
+         WRITE(11,*) """",i,""",""",j,""",",mat(i,j)
+      END DO
     END DO
 
     close(11)
@@ -100,11 +119,14 @@
       
        integer :: i,j
       
-       open(20,file='spin_mat.dat',status='unknown')
+       open(20,file='spin_mat.csv',status='unknown')
    
-   
+       WRITE(20,*) """X"",""Y"",""Z"""
+
        DO i=0,nst-1
-         WRITE(20,*) (mat(i,j), j=1,nst-1)
+         DO j=0,nst-1
+            WRITE(20,*) """",i,""",""",j,""",",mat(i,j)
+         END DO
        END DO
    
        close(20)
@@ -120,16 +142,23 @@
          
           integer :: i,j
          
-          open(12,file='tr_mat.dat',status='unknown')
-          open(13,file='tr_vec.dat',status='unknown')
+          open(12,file='tr_mat.csv',status='unknown')
+          open(13,file='tr_vec.csv',status='unknown')
           open(14,file='tr_spn.dat',status='unknown')
           
+          WRITE(12,*) """X"",""Y"",""Z"""
+          WRITE(13,*) """X"",""Y"",""Z"""
+
           DO i=0,nst-1
-            WRITE(12,*) (mat(i,j), j=1,nst-1)
+            DO j=0,nst-1
+               WRITE(12,*) """",i,""",""",j,""",",mat(i,j)
+            END DO   
           END DO
       
           DO i=0,nst-1
-            WRITE(13,*) (vec(i,j), j=1,nst-1)
+            DO j=0,nst-1
+               WRITE(13,*) """",i,""",""",j,""",",vec(i,j)
+            END DO   
           END DO
    
           DO i=0,nst-1
@@ -151,16 +180,23 @@
       
        integer :: i,j
       
-       open(12,file='diag_mat.dat',status='unknown')
-       open(13,file='diag_vec.dat',status='unknown')
+       open(12,file='diag_mat.csv',status='unknown')
+       open(13,file='diag_vec.csv',status='unknown')
        open(14,file='diag_enr.dat',status='unknown')
        
+       WRITE(12,*) """X"",""Y"",""Z"""
+       WRITE(13,*) """X"",""Y"",""Z"""
+
        DO i=0,nst-1
-         WRITE(12,*) (mat(i,j), j=1,nst-1)
+         DO j=0,nst-1
+            WRITE(12,*) """",i,""",""",j,""",",mat(i,j)
+         END DO   
        END DO
    
        DO i=0,nst-1
-         WRITE(13,*) (vec(i,j), j=1,nst-1)
+         DO j=0,nst-1
+            WRITE(13,*) """",i,""",""",j,""",",vec(i,j)
+         END DO
        END DO
 
        DO i=0,nst-1
