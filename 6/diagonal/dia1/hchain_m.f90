@@ -72,11 +72,16 @@
  use system; implicit none
 
  integer :: i,nu
+ 
+ character (len=20) :: filename
+ write (filename,"('eig_',i0,'_',i0,'.csv')") nu,nst
 
- open(10,file='eig.dat',position='append')
- write(10,*)'nu =',nu,'   nst =',nst
+ open(10,file=filename,status='unknown')
+
+ WRITE(10,*) """X"",""Y"",""Z"""
+
  do i=1,nst
-    write(10,'(i5,2f18.10)')i-1,enr(i),spn(i)
+    write(10,*) i-1,",",anint(enr(i)*10)/10,",",spn(i)
  enddo
  close(10)
 

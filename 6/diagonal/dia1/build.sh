@@ -1,2 +1,2 @@
-gfortran-10 -g hchain_m.f90 dsyev.f -o diag 
-./diag
+gfortran -g hchain_m.f90 dsyev.f -o diag_m
+./diag_m
